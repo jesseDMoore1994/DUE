@@ -7,3 +7,4 @@ due-build-deps*
 # package, but isn't under version control, since it's originating
 # file is.
 #docs/due.1
+result

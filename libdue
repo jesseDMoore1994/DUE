@@ -1,4 +1,4 @@
-#!/bin/bash  syntax
+#!/usr/bin/env bash  syntax
 # SCRIPT_PURPOSE: A function library for Dedicated User Environment (DUE)
 
 # Copyright 2021,2022 Nvidia Corporation.  All rights reserved.
@@ -31,6 +31,8 @@ USER_GROUP_NAME=$( getent group "$USER_GROUP_ID" | cut -d: -f1 )
 
 # default the login shell
 LOGIN_SHELL="/bin/bash --login"
+
+RSYNC=$(which rsync)
 
 # If debugging a container, this will be set
 OVERRIDE_ENTRYPOINT=""
@@ -585,11 +587,11 @@ function fxnMakeNewDockerImage()
         #
         fxnHeader "Creating directory to be used for container build at: [ $imageName ]"
         fxnPP "Copying non-template files from [ $USE_TEMPLATE_PATH ] to [ $imageName ]"
-        if [ ! -e /usr/bin/rsync ];then
+        if [ ! -e $(RSYNC) ];then
             fxnERR "rsync is not installed. Try: sudo $PACKAGE_UPDATE; sudo $PACKAGE_INSTALL rsync"
             exit 1
         fi
-        fxnEC rsync \
+        fxnEC "${RSYNC}" \
               --archive \
               --verbose \
               --exclude=*.template \

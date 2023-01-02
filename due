@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # SCRIPT_PURPOSE: Dedicated User Environment CLI
 
 # Copyright 2021,2022 Nvidia Corporation.  All rights reserved.
